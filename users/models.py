@@ -26,6 +26,7 @@ class User(AbstractUser):
         null=True,
         help_text="Введите из какого вы города",
     )
+    chat_id = models.CharField(max_length=255, verbose_name="chat_id", null=True, blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
