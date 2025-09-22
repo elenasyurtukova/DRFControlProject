@@ -7,19 +7,17 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
 from usefulthings.models import Wont
-from usefulthings.paginators import MyPagination
+from .paginators import MyPagination
 from usefulthings.serializers import WontSerializer
 from users.permissions import IsOwner
 
 
 class WontViewSet(ModelViewSet):
     """ViewSet для работы с привычками"""
-    queryset = Wont.objects.all()
+    queryset = Wont.objects.all().distinct()
     serializer_class = WontSerializer
     pagination_class = MyPagination
-    filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ['action', 'place']
-    ordering_fields = ['time_to_action', 'period']
+
 
     def perform_create(self, serialazer):
         """метод автоматического сохранения пользователя в поле владельца"""
@@ -44,6 +42,4 @@ class PublishedWontListView(ListAPIView):
     queryset = Wont.objects.filter(is_published=True)
     serializer_class = WontSerializer
     permission_classes = [AllowAny] #Любой пользователь может видеть публичные привычки
-    filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ['action', 'place']
-    ordering_fields = ['time_to_action', 'period']
+

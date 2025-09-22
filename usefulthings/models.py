@@ -40,7 +40,7 @@ class Wont(models.Model):
             raise ValidationError("Укажите или вознаграждение или связанную привычку")
         if self.is_pleasant and (self.award or self.related_wont):
             raise ValidationError("У приятной привычки не может быть вознаграждения или связанной привычки")
-        if self.time_to_action > 120:
+        if self.time_to_action > timedelta(seconds=120):
             raise ValidationError("Время выполнения должно быть не больше 120 секунд")
         if self.period > 7:
             raise ValidationError("Нельзя выполнять привычку реже, чем 1 раз в 7 дней, и чаще, чем раз в день")

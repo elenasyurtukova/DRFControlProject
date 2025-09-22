@@ -14,6 +14,6 @@ class WontSerializer(ModelSerializer):
 
     def validate(self, attrs):
         wont = Wont(**attrs)
-        wont.owner = self.context['request'].owner
+        wont.owner = self.context['request'].user
         wont.clean()
         return attrs
