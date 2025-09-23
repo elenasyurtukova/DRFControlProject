@@ -29,7 +29,7 @@ class WontViewSet(ModelViewSet):
         """метод распределения прав доступа"""
         if self.action in ["create", ]:
             self.permission_classes = (IsAuthenticated,)
-        elif self.action in ["update", "destroy", "retrieve"]:
+        elif self.action in ["partial_update", "update", "destroy", "retrieve"]:
             self.permission_classes = (IsOwner,)
         return super().get_permissions()
 
