@@ -1,13 +1,11 @@
-from datetime import timezone, timedelta
+from datetime import timedelta
 
 from django.db import models
 from rest_framework.exceptions import ValidationError
 
-from config.settings import AUTH_USER_MODEL
-from users.models import User
-
 
 class Wont(models.Model):
+    """Класс модели привычки"""
     owner = models.ForeignKey(
         "users.User",
         on_delete=models.SET_NULL,
