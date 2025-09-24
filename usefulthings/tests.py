@@ -1,5 +1,4 @@
-import datetime
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 
 from django.urls import reverse
 from rest_framework import status
@@ -29,12 +28,13 @@ class WontTestCase(APITestCase):
     def test_wont_create(self):
         """Тестирование создания экземпляра привычки"""
         url = reverse("usefulthings:wont-create")
-        data = {"place": "test",
-                "time": "05:00:00",
-                "action": "test",
-                "period": 1,
-                "time_to_action": timedelta(seconds=60)
-                }
+        data = {
+            "place": "test",
+            "time": "05:00:00",
+            "action": "test",
+            "period": 1,
+            "time_to_action": timedelta(seconds=60),
+        }
         response = self.client.post(url, data)
         print(datetime.now())
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -65,7 +65,7 @@ class WontTestCase(APITestCase):
             "period": 1,
             "award": "тестовое вознаграждение",
             "time": "05:05:00",
-            "time_to_action": timedelta(seconds=65)
+            "time_to_action": timedelta(seconds=65),
         }
         response = self.client.patch(url, data=data_update)
         data = response.json()

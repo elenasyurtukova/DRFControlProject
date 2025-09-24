@@ -1,15 +1,22 @@
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView, \
-    DestroyAPIView
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.generics import (
+    CreateAPIView,
+    DestroyAPIView,
+    ListAPIView,
+    RetrieveAPIView,
+    UpdateAPIView,
+)
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from usefulthings.models import Wont
-from .paginators import MyPagination
 from usefulthings.serializers import WontSerializer
 from users.permissions import IsOwner
+
+from .paginators import MyPagination
 
 
 class WontCreateApiView(CreateAPIView):
     """Класс контроллера для создания привычки"""
+
     queryset = Wont.objects.all()
     serializer_class = WontSerializer
     permission_classes = (IsAuthenticated,)
@@ -23,6 +30,7 @@ class WontCreateApiView(CreateAPIView):
 
 class WontListApiView(ListAPIView):
     """Класс контроллера для вывода списка привычек"""
+
     queryset = Wont.objects.all()
     serializer_class = WontSerializer
     pagination_class = MyPagination
@@ -34,6 +42,7 @@ class WontListApiView(ListAPIView):
 
 class WontRetrieveApiView(RetrieveAPIView):
     """Класс контроллера для вывода экземпляра привычки"""
+
     queryset = Wont.objects.all()
     serializer_class = WontSerializer
     permission_classes = (IsOwner,)
@@ -41,6 +50,7 @@ class WontRetrieveApiView(RetrieveAPIView):
 
 class WontUpdateApiView(UpdateAPIView):
     """Класс контроллера для изменения экземпляра привычки"""
+
     queryset = Wont.objects.all()
     serializer_class = WontSerializer
     permission_classes = (IsOwner,)
@@ -48,14 +58,17 @@ class WontUpdateApiView(UpdateAPIView):
 
 class WontDestroyApiView(DestroyAPIView):
     """Класс контроллера для удаления экземпляра привычки"""
+
     queryset = Wont.objects.all()
     serializer_class = WontSerializer
     permission_classes = (IsOwner,)
 
 
 class PublishedWontListView(ListAPIView):
-    """Класс контроллера для списка публичных привычек """
+    """Класс контроллера для списка публичных привычек"""
+
     queryset = Wont.objects.filter(is_published=True)
     serializer_class = WontSerializer
-    permission_classes = [AllowAny] #Любой пользователь может видеть публичные привычки
-
+    permission_classes = [
+        AllowAny
+    ]  # Любой пользователь может видеть публичные привычки

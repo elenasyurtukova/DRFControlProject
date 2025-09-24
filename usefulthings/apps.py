@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class UsefulthingsConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'usefulthings'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "usefulthings"

@@ -4,6 +4,7 @@ from django.db import models
 
 class User(AbstractUser):
     """Описание полей модели пользвателя"""
+
     username = None
     email = models.EmailField(unique=True, verbose_name="email")
     phone = models.CharField(
@@ -27,7 +28,9 @@ class User(AbstractUser):
         null=True,
         help_text="Введите из какого вы города",
     )
-    chat_id = models.CharField(max_length=255, verbose_name="chat_id", null=True, blank=True)
+    chat_id = models.CharField(
+        max_length=255, verbose_name="chat_id", null=True, blank=True
+    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
